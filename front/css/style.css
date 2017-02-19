@@ -1,0 +1,174 @@
+/* Styles go here */
+
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+}
+
+
+body {
+  font: 14px 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  line-height: 1.4em;
+  background: #eaeaea;
+  width: 50%;
+  margin: 0 auto;
+} 
+
+#todoapp {
+}
+
+#header {
+  font-size: 24px;
+}
+
+#header h1 {
+  color: #b3b3b3;
+  text-align: center;
+}
+
+#new-todo {
+  width: 100%;
+  padding: 10px;
+  box-sizing: border-box;
+
+  font-size: 24px;
+  font-style: italic;
+}
+
+#main {
+  width: 100%;
+}
+
+#todo-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  background-color:white;
+}
+
+#todo-list  li{
+  border-bottom: 1px dotted;
+  font-size: 24px;
+  position: relative;
+}
+
+#todo-list  li:first-child{
+  border-top: 1px dotted;
+}
+
+#todo-list li .toggle {
+  height: 40px;
+  text-align: center;
+  width: 40px;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  margin: auto 0;
+}
+
+#todo-list li label {
+  padding: 15px 60px 15px 15px;
+  margin-left: 45px;
+  display: block;
+}
+
+#todo-list li .destroy {
+  position: absolute;
+  top: 0;
+  right: 10px;
+  bottom: 0;
+  width: 40px;
+  height: 40px;
+  margin: auto 0;
+  font-size: 22px;
+  outline: none;
+  display: none;
+
+  /* Remove default style of button */
+  padding: 0;
+  margin: 0;
+  border: 0;
+  background: none;
+}
+
+#todo-list li .destroy:after {
+  content: '✖'; 
+}
+
+#todo-list li .destroy:hover {
+  color: red;
+}
+
+#todo-list li:hover .destroy {
+  display: block;
+}
+
+#footer {
+  position: relative;
+}
+
+#todo-count {
+  float: left;
+  text-align: left;
+}
+#filters {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+
+  position: absolute;
+  left: 0;
+  right: 0;
+  text-align: center;
+  z-index:1;
+}
+#filters li {
+  display: inline;
+}
+#clear-completed {
+  float: right;
+  position: relative;
+  z-index:2;
+}
+
+#info {
+  width: 100%;
+  text-align: center;
+  clear: both;
+}
+
+#info p {
+  color: gray;
+}
+
+/* Dynamic Style. show*/
+#todo-list li.hide {
+  display: none;
+}
+
+/* Dynamic Style. completed*/
+#todo-list li.completed {
+  text-decoration: line-through;
+  color: gray;
+}
+
+/* Dynamic Style. edit*/
+#todo-list li.edit {
+  height: 40px;
+}
+
+#todo-list li.edit .view {
+  display: none;
+} 
+
+#todo-list li.edit input {
+  height: 40px;
+  padding: 15px 60px 15px 15px;
+  box-sizing: border-box;
+  font-size: 24px;
+  position: absolute;
+  left: 45px;
+  right: 0px;
+}
