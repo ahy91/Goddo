@@ -5,6 +5,8 @@
  * Global Event Binding.
  */ 
 
+/* Main */
+
 window.onload = function() {
    /* Register Event */ 
 
@@ -13,6 +15,86 @@ window.onload = function() {
       this.todoContainer = document.getElementById('todo-list');
    }
 
+   /* Model to server interface */
+   function Model() {
+      this.serverUrl = "http://localhost:8000"
+   }
+
+   Model.prototype.create = function(newItem, callback) {
+      //'Create' of CRUD
+      $.ajax({
+         dataType: 'json',
+         url: this.serverUrl + '/create',
+         data : {
+            'id': newItem.id,
+            'text': newItem.text,
+            'account': ''
+         }
+      }).done(function(msg) {
+         console.log(msg);
+         //nothing to update view.
+      }).fail(function(msg) {
+         console.log(msg);
+      });
+   };
+   Model.prototype.read = function(callback) {
+      //'Read' of CRUD
+      $.ajax({
+         dataType: 'json',
+         url: this.serverUrl + '/read',
+         data : {
+            'account': ''
+         }
+      }).done(function(msg) {
+         console.log(msg);
+         //update view.
+         //callback()
+      }).fail(function(msg) {
+         console.log(msg);
+      });
+   };
+   Model.prototype.update = function(id, newItem, callback) {
+      //'Update' of CRUD
+      $.ajax({
+         dataType: 'json',
+         url: this.serverUrl + '/update',
+         data : {
+            'id': newItem.id,
+            'text': newItem.text,
+            'account': ''
+         }
+      }).done(function(msg) {
+         console.log(msg);
+         //update view for updated item.
+         //'Read' action.
+         //callback()
+      }).fail(function(msg) {
+         console.log(msg);
+      });
+   };
+   Model.prototype.delete = function(id, callback) {
+      //'Delete' of CRUD
+      $.ajax({
+         dataType: 'json',
+         url: this.serverUrl + '/delete',
+         data : {
+            'id': newItem.id,
+            'account': ''
+         }
+      }).done(function(msg) {
+         console.log(msg);
+         //update view
+         //'Read' action
+         //callback()
+      }).fail(function(msg) {
+         console.log(msg);
+      });
+   };
+
+   //Model.prototype.check
+   //Model.prototype.clearAll
+
+   /* Controller + View */
    TodoList.prototype.show = function() {
       var view = '';
       var length = this.todos.length;
