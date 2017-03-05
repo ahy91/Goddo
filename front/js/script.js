@@ -21,6 +21,7 @@ window.onload = function() {
    }
 
    Model.prototype.create = function(newItem, callback) {
+      callback = callback || function() {};
       //'Create' of CRUD
       $.ajax({
          dataType: 'json',
@@ -28,64 +29,69 @@ window.onload = function() {
          data : {
             'id': newItem.id,
             'text': newItem.text,
-            'account': ''
+            'deadline': newItem.deadline,
+            'account': "ANONYMOUS"
          }
       }).done(function(msg) {
          console.log(msg);
          //nothing to update view.
+         callback();
       }).fail(function(msg) {
          console.log(msg);
       });
    };
    Model.prototype.read = function(callback) {
+      callback = callback || function() {};
       //'Read' of CRUD
       $.ajax({
          dataType: 'json',
          url: this.serverUrl + '/read',
          data : {
-            'account': ''
+            'account': 'ANONYMOUS'
          }
       }).done(function(msg) {
          console.log(msg);
          //update view.
-         //callback()
+         callback()
       }).fail(function(msg) {
          console.log(msg);
       });
    };
-   Model.prototype.update = function(id, newItem, callback) {
+   Model.prototype.update = function(id, newValue, callback) {
+      callback = callback || function() {};
       //'Update' of CRUD
       $.ajax({
          dataType: 'json',
          url: this.serverUrl + '/update',
          data : {
-            'id': newItem.id,
-            'text': newItem.text,
-            'account': ''
+            'id': id,
+            'text': newValue,
+            'account': 'ANONYMOUS'
          }
       }).done(function(msg) {
          console.log(msg);
          //update view for updated item.
          //'Read' action.
-         //callback()
+         callback()
       }).fail(function(msg) {
          console.log(msg);
       });
    };
    Model.prototype.delete = function(id, callback) {
+      callback = callback || function() {};
       //'Delete' of CRUD
       $.ajax({
          dataType: 'json',
          url: this.serverUrl + '/delete',
          data : {
-            'id': newItem.id,
-            'account': ''
+            'id': id,
+            'account': 'ANONYMOUS'
          }
       }).done(function(msg) {
          console.log(msg);
          //update view
          //'Read' action
-         //callback()
+         callback()
       }).fail(function(msg) {
          console.log(msg);
       });
@@ -193,6 +199,7 @@ window.onload = function() {
 
 
    todoList = new TodoList();
+   model = new Model();
 
    //Event Binding.
 
@@ -204,13 +211,23 @@ window.onload = function() {
          if(newTodo.value.trim() === '') 
             return;
 
-         todoList.add({
+         var newItem = {
             id: new Date().getTime(),
             text: newTodo.value,
-            completed: false ,
-            hide: false 
+            deadline: "NONE"
+         };
+
+         model.create(newItem, function() {
+            todoList.add({
+               id: newItem.id,
+               text: newItem.text,
+               deadline: newItem.deadline,
+               completed: false ,
+               hide: false 
+            });
+            //What if fail?
+            newTodo.value = '';
          });
-         newTodo.value = '';
       }
 
    });
@@ -253,11 +270,15 @@ window.onload = function() {
          editBox.addEventListener("keypress", function(event) {
             if(event.keyCode == 13) {
                if(editBox.value.trim() === '') {
-                  todoList.remove(todoToEdit.id);
+                  model.delete(todoToEdit.id, function() {
+                     todoList.remove(todoToEdit.id);
+                  });
                }
                else {
-                  todoList.edit(todoToEdit.id, editBox.value);
-                  todoElement.setAttribute("class", "");
+                  model.update(todoToEdit.id, editBox.value, function() {
+                     todoList.edit(todoToEdit.id, editBox.value);
+                     todoElement.setAttribute("class", "");
+                  });
                }
             }
          });
@@ -293,7 +314,9 @@ window.onload = function() {
          var todoElement = event.target.parentNode.parentNode;
          var todoToRemove = todoElement.getAttribute('data-id');
 
-         todoList.remove(todoToRemove);
+         model.delete(todoToRemove, function() {
+            todoList.remove(todoToRemove);
+         });
       }
    });
 
