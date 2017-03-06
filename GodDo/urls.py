@@ -15,8 +15,8 @@ Including another URLconf
 """
 from django.conf.urls import url
 from django.contrib import admin
-from mysite.hello import index
-from mysite.create_data import create
+from GodDo.back.hello import index
+from GodDo.back.create import create
 
 urlpatterns = [
 	url(r'^admin/', admin.site.urls),

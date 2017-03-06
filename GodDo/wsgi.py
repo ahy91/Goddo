@@ -13,6 +13,6 @@ import sys
 from django.core.wsgi import get_wsgi_application
 
 sys.path.append('/home/ubuntu/Goddo')
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", "mysite.settings")
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "GodDo.settings")
 
 application = get_wsgi_application()

@@ -1,5 +1,5 @@
-import sqlite3
 from django.shortcuts import render
+import sqlite3
 
 def create(request):
 	# Get data from request
@@ -15,10 +15,10 @@ def create(request):
 	acc = msg['account']
 
 	# Insert to databse
-	con = sqlite3.connect("/home/ubuntu/Goddo/mysite/DB/test.db")
+	con = sqlite3.connect("/home/ubuntu/Goddo/GodDo/DB/test.db")
 	cur = con.cursor()
 	query = "INSERT INTO test VALUES(%s, \"%s\", \"%s\", \"%s\");" % (id_v, text, deadline, acc)
-	row_count = cur.execute(query)
+	cur.execute(query)
 	#cur.execute("INSERT INTO test VALUES(?, ?, ?, ?);", (id_v, text, deadline, acc))
 	con.commit()
 	con.close()
