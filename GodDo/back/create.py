@@ -9,12 +9,13 @@ def create(request):
 	else:
 		msg = request.POST
 
-	id_v = msg['id']
-	text = msg['text']
-	deadline = msg['deadline']
-	acc = msg['account']
+	id_v = msg.get('id')
+	text = msg.get('text')
+	deadline = msg.get("deadline")
+	acc = msg.get('account')
 
 	# Insert to databse
+	"""
 	con = sqlite3.connect("/home/ubuntu/Goddo/GodDo/DB/test.db")
 	cur = con.cursor()
 	query = "INSERT INTO test VALUES(%s, \"%s\", \"%s\", \"%s\");" % (id_v, text, deadline, acc)
@@ -22,5 +23,6 @@ def create(request):
 	#cur.execute("INSERT INTO test VALUES(?, ?, ?, ?);", (id_v, text, deadline, acc))
 	con.commit()
 	con.close()
+	"""
 
-	return render(request, 'index.html', {'message': query})
+	return render(request, 'html/index.html', {})
