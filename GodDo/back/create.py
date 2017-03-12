@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from django.http import JsonResponse
 import sqlite3
 
 def create(request):
@@ -15,7 +16,6 @@ def create(request):
 	acc = msg.get('account')
 
 	# Insert to databse
-	"""
 	con = sqlite3.connect("/home/ubuntu/Goddo/GodDo/DB/test.db")
 	cur = con.cursor()
 	query = "INSERT INTO test VALUES(%s, \"%s\", \"%s\", \"%s\");" % (id_v, text, deadline, acc)
@@ -23,6 +23,6 @@ def create(request):
 	#cur.execute("INSERT INTO test VALUES(?, ?, ?, ?);", (id_v, text, deadline, acc))
 	con.commit()
 	con.close()
-	"""
 
-	return render(request, 'html/index.html', {})
+#return render(request, 'html/index.html', {})
+	return JsonResponse({'ret':'OK'})

@@ -15,13 +15,14 @@ Including another URLconf
 """
 from django.conf.urls import url
 from django.contrib import admin
-from GodDo.back.hello import index
+from GodDo.back.index import index
 from GodDo.back.create import create
 from django.conf import settings
 from django.conf.urls.static import static
 
 urlpatterns = [
-	url('', index),
+#url('', index),
+	url(r'^$',index),
 	url(r'^admin/', admin.site.urls),
-	url('create', create),
-] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+	url(r'^create', create),
+]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

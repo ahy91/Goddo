@@ -55,8 +55,7 @@ ROOT_URLCONF = 'GodDo.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': ['/home/ubuntu/Goddo/GodDo/templates',
-		'/home/ubuntu/Goddo/GodDo/static'],
+        'DIRS': ['/home/ubuntu/Goddo/GodDo/templates',],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -129,4 +128,4 @@ STATICFILES_DIRS = [
 ]
 
 STATIC_URL = '/static/'
-STATIC_ROOT = "/home/ubuntu/Goddo/GodDo/static/"
+STATIC_ROOT = "/home/ubuntu/Goddo/GodDo/static"
