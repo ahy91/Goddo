@@ -52,7 +52,7 @@ window.onload = function() {
       }).done(function(msg) {
          console.log(msg);
          //update view.
-         callback()
+         callback(msg)
       }).fail(function(msg) {
          console.log(msg);
       });
@@ -102,6 +102,21 @@ window.onload = function() {
 
    /* Controller + View */
    TodoList.prototype.show = function() {
+      this.model.read(function(msg) {
+         //insert data into todos array.
+         for(var i = 0; i < msg.data.length; i++) {
+            this.add({
+               id: msg.data[i].id,
+               text: msg.data[i].text,
+               deadline: msg.data[i].deadline,
+               completed: false ,
+               hide: false
+            })
+         }
+         this.render();
+      });
+   }
+   TodoList.prototype.render = function() {
       var view = '';
       var length = this.todos.length;
 
@@ -200,6 +215,11 @@ window.onload = function() {
 
    todoList = new TodoList();
    model = new Model();
+   //TODO - more neat way is needed.
+   todoList.model = model;
+
+   //initial request
+   todoList.show();
 
    //Event Binding.
 
@@ -319,5 +339,4 @@ window.onload = function() {
          });
       }
    });
-
 };
