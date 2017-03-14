@@ -17,7 +17,7 @@ window.onload = function() {
 
    /* Model to server interface */
    function Model() {
-      this.serverUrl = "http://localhost:8000"
+      this.serverUrl = window.location.origin; 
    }
 
    Model.prototype.create = function(newItem, callback) {
