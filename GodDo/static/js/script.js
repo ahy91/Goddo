@@ -238,6 +238,7 @@ window.onload = function() {
          };
 
          model.create(newItem, function() {
+            /*
             todoList.add({
                id: newItem.id,
                text: newItem.text,
@@ -245,6 +246,9 @@ window.onload = function() {
                completed: false ,
                hide: false 
             });
+            */
+            //TODO - REFACTORING...
+            todoList.show();
             //What if fail?
             newTodo.value = '';
          });
@@ -291,12 +295,14 @@ window.onload = function() {
             if(event.keyCode == 13) {
                if(editBox.value.trim() === '') {
                   model.delete(todoToEdit.id, function() {
-                     todoList.remove(todoToEdit.id);
+                     //todoList.remove(todoToEdit.id);
+                     todoList.show();
                   });
                }
                else {
                   model.update(todoToEdit.id, editBox.value, function() {
-                     todoList.edit(todoToEdit.id, editBox.value);
+                     //todoList.edit(todoToEdit.id, editBox.value);
+                     todoList.show();
                      todoElement.setAttribute("class", "");
                   });
                }
@@ -335,7 +341,8 @@ window.onload = function() {
          var todoToRemove = todoElement.getAttribute('data-id');
 
          model.delete(todoToRemove, function() {
-            todoList.remove(todoToRemove);
+            //todoList.remove(todoToRemove);
+            todoList.show();
          });
       }
    });
