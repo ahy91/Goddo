@@ -102,12 +102,14 @@ window.onload = function() {
 
    /* Controller + View */
    TodoList.prototype.show = function() {
+      var todos = this.todos;
+
       this.model.read(function(msg) {
          //insert data into todos array.
          if(!msg.data)
             return;
          for(var i = 0; i < msg.data.length; i++) {
-            this.add({
+            todos.push({
                id: msg.data[i].id,
                text: msg.data[i].text,
                deadline: msg.data[i].deadline,
