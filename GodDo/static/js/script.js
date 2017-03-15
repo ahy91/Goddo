@@ -104,6 +104,8 @@ window.onload = function() {
    TodoList.prototype.show = function() {
       this.model.read(function(msg) {
          //insert data into todos array.
+         if(!msg.data)
+            return;
          for(var i = 0; i < msg.data.length; i++) {
             this.add({
                id: msg.data[i].id,
