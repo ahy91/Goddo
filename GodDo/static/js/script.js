@@ -108,6 +108,7 @@ window.onload = function() {
          //insert data into todos array.
          if(!msg.data)
             return;
+         todoList.todos = [];
          for(var i = 0; i < msg.data.length; i++) {
             todoList.todos.push({
                id: msg.data[i].id,
