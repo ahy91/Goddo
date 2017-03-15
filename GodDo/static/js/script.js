@@ -102,14 +102,14 @@ window.onload = function() {
 
    /* Controller + View */
    TodoList.prototype.show = function() {
-      var todos = this.todos;
+      var todoList = this;
 
       this.model.read(function(msg) {
          //insert data into todos array.
          if(!msg.data)
             return;
          for(var i = 0; i < msg.data.length; i++) {
-            todos.push({
+            todoList.todos.push({
                id: msg.data[i].id,
                text: msg.data[i].text,
                deadline: msg.data[i].deadline,
@@ -117,7 +117,7 @@ window.onload = function() {
                hide: false
             })
          }
-         this.render();
+         todoList.render();
       });
    }
    TodoList.prototype.render = function() {
