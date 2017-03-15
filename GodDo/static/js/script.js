@@ -52,7 +52,7 @@ window.onload = function() {
       }).done(function(msg) {
          console.log(msg);
          //update view.
-         callback()
+         callback(msg)
       }).fail(function(msg) {
          console.log(msg);
       });
