@@ -20,6 +20,8 @@ from django.conf.urls.static import static
 from GodDo.back.index import index
 from GodDo.back.create import create
 from GodDo.back.read import read
+from GodDo.back.update import update
+from GodDo.back.delete import delete
 
 urlpatterns = [
 #url('', index),
@@ -27,4 +29,6 @@ urlpatterns = [
 	url(r'^admin/', admin.site.urls),
 	url(r'^create/', create),
 	url(r'^read/', read),
+	url(r'^update/', update),
+	url(r'^delete/', delete),
 ]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
